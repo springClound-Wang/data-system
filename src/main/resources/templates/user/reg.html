@@ -1,0 +1,73 @@
+﻿
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Badge Signup Form template Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login sign up Responsive web template, SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+    <link href="/css/stylereg.css" rel="stylesheet" type="text/css" media="all" />
+
+</head>
+<body>
+    <!-- main -->
+    <div class="w3layouts-main">
+        <h1>用户注册</h1>
+        <div class="agilesign-form">
+            <div class="agileits-top">
+                <form id="form" action="#" method="post" onsubmit="return false">
+
+                    <div class="styled-input w3ls-text">
+                        <input type="text" name="email" id="email" required="" />
+                        <label>邮箱</label>
+                        <span></span>
+                    </div>
+
+                    <div class="styled-input w3ls-text">
+                        <input type="password" name="密码" id="pwd" required="">
+                        <label>密码</label>
+                        <span></span>
+                    </div>
+                    <div class="styled-input w3ls-text">
+                        <input type="password" name="确认密码" id="pwd2" required="" />
+                        <label>确认密码</label>
+                        <span></span>
+                    </div>
+
+                    <div class="agileits-bottom">
+                        <input type="submit" id="reg" value="注册">
+                    </div>
+                </form>
+            </div>
+            <div class="w3agile-btm">
+                <p>已经有账号 ? <a href="/login"> 登录</a> </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $("#reg").click(function () {
+                var email=$("#email").val();
+                var pwd=$("#pwd").val();
+                var pwd2=$("#pwd2").val();
+                if(pwd!=pwd2){
+                    $("#form")[0].reset();
+                    alert("两次密码不一致");
+                  return;
+                }
+                $.get("http://localhost:8088//rest/users/register?username="+email+"&password="+pwd,function (data) {
+                    if(data.success){
+                        alert("注册成功");
+                        $("#form")[0].reset();
+                    }else{
+                        alert("注册失败");
+                    }
+                },"json");
+            });
+        });
+    </script>
+</body>
+</html>
